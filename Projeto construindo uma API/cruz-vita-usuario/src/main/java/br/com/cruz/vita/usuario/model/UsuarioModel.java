@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import br.com.cruz.vita.usuario.dto.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +20,10 @@ import lombok.NoArgsConstructor;
 
 
 @Valid
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Data
 @Table (name = "usuarios")
 public class UsuarioModel {
 	
@@ -33,21 +35,25 @@ public class UsuarioModel {
 	@Email 
 	private String email;
 	
-	@Column(name = "Senha", length = 10)
+	@Column(name = "senha", length = 10)
 	private String senha; 
 	
-	@Column(name = "DataExclusão")
-	private LocalDateTime dataUsuarioDeletado ;
+	private LocalDateTime data_exclusao;
 	
-	@Column(name = "DataCadastro")
-	private LocalDateTime dataDeCadastro;
+	@Column(name = "data_cadastro")
+	private LocalDateTime dataDeCadastro = LocalDateTime.now();
 	
-	@Column(name = "CPF")
+	@Column(name = "cpf")
 	private String cpf ;
 	
     public UsuarioModel(UsuarioDTO usuario){
     	this.cpf = usuario.getCpf();
     	this.email = usuario.getEmail();
     	this.senha = usuario.getSenha();
-      }	
+     }
+
+//	public void setData_exclusao(LocalDateTime now) {
+//		// TODO Auto-generated method stub
+//		
+//	}    
 }
